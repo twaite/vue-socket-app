@@ -6,6 +6,6 @@
 
 <style>
 nav {
-	@apply w-1/4 h-full border-r-2 border-gray-800 p-3;
+	@apply w-1/4 h-full border-r-2 border-gray-900 p-3;
 }
 </style>

@@ -21,6 +21,6 @@ defineComponent({
 @tailwind utilities;
 
 #root {
-	@apply bg-gray-700 h-screen text-white flex flex-row;
+	@apply bg-gray-800 h-screen text-white flex flex-row;
 }
 </style>
