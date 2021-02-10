@@ -1,0 +1,9 @@
+{
+  "name": "vue-socket-server",
+  "version": "1.0.0",
+  "description": "Example server for a vue chat app",
+  "main": "index.js",
+  "author": "twaite",
+  "license": "MIT",
+  "private": false
+}
