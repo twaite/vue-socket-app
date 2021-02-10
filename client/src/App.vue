@@ -1,12 +1,26 @@
 <template>
-	<h1>Hello World</h1>
+	<div id="root">
+		<Sidebar />
+		<Chat />
+	</div>
 </template>
 
-<script>
+<script setup>
+import { defineComponent } from 'vue';
+import Chat from './components/Chat.vue';
+import Sidebar from './components/Sidebar.vue';
 
-export default {
-  name: 'App',
-}
+defineComponent({
+	components: { Chat, Sidebar }
+});
 </script>
 
-<style></style>
+<style>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+	@apply bg-gray-700 h-screen text-white flex flex-row;
+}
+</style>
