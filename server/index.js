@@ -25,7 +25,12 @@ io.on("connection", (socket) => {
   socket.on("login", (user) => {
     const ip = socket.conn.remoteAddress;
     users[ip] = user;
-    console.log("users updated", user);
+
+    const flatUsers = Object.entries(users).map(([id, user]) => ({
+      id,
+      ...user,
+    }));
+    io.emit("user list updated", flatUsers);
   });
 });
 

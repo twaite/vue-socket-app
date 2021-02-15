@@ -1,6 +1,6 @@
 <template>
 	<div id="root">
-		<Sidebar />
+		<Sidebar :users="state.users" />
 		<Chat :messages="state.messages" @message="message" />
 		<LoginModal v-if="!state.loggedIn" @login="login" />
 	</div>
@@ -21,8 +21,13 @@ socket.on('chat message', msg => {
 const state = reactive({
 	loggedIn: false,
 	user: null,
-	messages: []
+	messages: [],
+	users: []
 });
+
+socket.on('user list updated', users => {
+	state.users = users;
+})
 
 function login(user) {
 	socket.emit('login', user);

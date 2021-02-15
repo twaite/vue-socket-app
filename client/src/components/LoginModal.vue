@@ -1,5 +1,6 @@
 <template>
 	<div class="modal-container">
+		<div class="backdrop" />
 		<form class="modal" @submit="submit" novalidate>
 			<header>
 				<h1>Enter Your Name to Chat</h1>
@@ -71,8 +72,12 @@ export default defineComponent({
 	@apply fixed flex h-screen w-screen items-center justify-center;
 }
 
+.backdrop {
+	@apply bg-gray-900 fixed h-screen w-screen z-0 opacity-80;
+}
+
 .modal {
-	@apply w-1/3 bg-gray-700 p-3 rounded-lg shadow-lg;
+	@apply w-1/3 bg-gray-700 p-3 rounded-lg shadow-lg z-10;
 }
 
 header {
