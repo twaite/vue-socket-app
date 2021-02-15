@@ -8,6 +8,9 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
+// list of users mapped by ip
+const users = {};
+
 io.on("connection", (socket) => {
   console.log("User connected");
 
@@ -16,8 +19,13 @@ io.on("connection", (socket) => {
   });
 
   socket.on("chat message", (msg) => {
-    console.log("message: " + msg);
     io.emit("chat message", msg);
+  });
+
+  socket.on("login", (user) => {
+    const ip = socket.conn.remoteAddress;
+    users[ip] = user;
+    console.log("users updated", user);
   });
 });
 

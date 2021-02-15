@@ -1,18 +1,42 @@
 <template>
 	<div id="root">
 		<Sidebar />
-		<Chat />
+		<Chat :messages="state.messages" @message="message" />
+		<LoginModal v-if="!state.loggedIn" @login="login" />
 	</div>
 </template>
 
 <script setup>
-import { defineComponent } from 'vue';
+import { reactive } from 'vue';
 import Chat from './components/Chat.vue';
+import LoginModal from './components/LoginModal.vue';
 import Sidebar from './components/Sidebar.vue';
 
-defineComponent({
-	components: { Chat, Sidebar }
+const socket = io('http://192.168.1.70:3000');
+
+socket.on('chat message', msg => {
+	state.messages.push(msg)
+})
+
+const state = reactive({
+	loggedIn: false,
+	user: null,
+	messages: []
 });
+
+function login(user) {
+	socket.emit('login', user);
+	state.loggedIn = true;
+	state.user = user;
+}
+
+function message(message) {
+	socket.emit('chat message', {
+		name: `${state.user.firstName} ${state.user.lastName}`,
+		time: new Date(),
+		text: message
+	});
+}
 </script>
 
 <style>
